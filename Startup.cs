@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+using r.net.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace r.net
 {
     public class Startup
@@ -26,6 +29,10 @@ namespace r.net
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<DonationDBContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("DevConnection"))
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
